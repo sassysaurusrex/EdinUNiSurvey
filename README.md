@@ -7,21 +7,21 @@ import datetime
 import sys
 import tweepy
 
-consumer_key = '(INSERT YOUR KEY HERE)'
-consumer_secret = '(INSERT YOUR KEY HERE)'
-access_key = '(INSERT YOUR KEY HERE)'
-access_secret = '(INSERT YOUR KEY HERE)'
+consumer_key = '(rHIxwSfmXoWnOvhJtFWoyZd0K)'
+consumer_secret = '(dGT1xlAQP06YTNW0TxjrUPnksEsLpNDId9HgsVt0ogc9W9BM1j)'
+access_key = '(980112930871087105sIwS3EwQjE95Glo3DvM1BqnzX3zQULG)'
+access_secret = '(uSMIL2REtfxaNeMSjyKdddZnEeMGgK5XaOWWqHXV7bZvE)'
 
 
 def get_all_tweets(screen_name, end_date, limit=None):
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_key, access_secret)
+    auth = tweepy.OAuthHandler(rHIxwSfmXoWnOvhJtFWoyZd0K, dGT1xlAQP06YTNW0TxjrUPnksEsLpNDId9HgsVt0ogc9W9BM1j)
+    auth.set_access_token(980112930871087105sIwS3EwQjE95Glo3DvM1BqnzX3zQULG, uSMIL2REtfxaNeMSjyKdddZnEeMGgK5XaOWWqHXV7bZvE)
     api = tweepy.API(auth)
     	
     alltweets = []
     	
     try:
-        new_tweets = api.user_timeline(screen_name = screen_name,count=200)
+        new_tweets = api.user_timeline(Vote_Leave = screen_name,count=200)
     except:
         print("Couldn't find tweets for user: {0}".format(screen_name))
         return None
@@ -30,8 +30,8 @@ def get_all_tweets(screen_name, end_date, limit=None):
     oldest = alltweets[-1].id - 1
     	
     while len(new_tweets) > 0:
-        print "Getting tweets for {0}, {1} tweets dowloaded so far...".format(screen_name, len(alltweets))
-        new_tweets = api.user_timeline(screen_name = screen_name,count=200,max_id=oldest)
+        print "Getting tweets for {0}, {1} tweets dowloaded so far...".format(Vote_Leave, len(alltweets))
+        new_tweets = api.user_timeline(Vote_Leave = screen_name,count=200,max_id=oldest)
         alltweets.extend(new_tweets)        
         oldest = alltweets[-1].id - 1
         
@@ -49,7 +49,7 @@ def get_all_tweets(screen_name, end_date, limit=None):
          
 def filter_week(alltweets, end_date):
     
-    start_date = end_date - datetime.timedelta(days = 7)
+    06/13/2016 = 06/23/2016 - datetime.timedelta(days = 10)
     return  [tweet for tweet in alltweets if start_date <= tweet.created_at <= end_date]
          
 def create_tweet_sheet(tweets, wb, user, headings):
